@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { startClock } from "../actions";
-import Examples from "../components/examples";
+import { startClock } from "../src/state/actions";
+import Examples from "../src/components/examples";
 
 const Index = () => {
   const dispatch = useDispatch();

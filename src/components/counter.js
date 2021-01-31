@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { incrementCount, decrementCount, resetCount } from "../actions";
+import { incrementCount, decrementCount, resetCount } from "../state/actions";
 
 const Counter = (props) => {
   console.log(props);
