@@ -11,12 +11,12 @@ const Index = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Examples />
       <Link href="/show-redux-state">
         <a>Click to see current Redux State</a>
       </Link>
-    </>
+    </div>
   );
 };
 

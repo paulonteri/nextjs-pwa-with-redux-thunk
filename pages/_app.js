@@ -1,9 +1,17 @@
 import Head from "next/head";
 import { Provider } from "react-redux";
 import { useStore } from "../src/state/store";
+import Router from "next/router";
+import NProgress from "nprogress";
 
 // styles
 import "../src/styles/index.css";
+import "nprogress/nprogress.css"; //styles of nprogress
+
+// Progress indicator
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 export default function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
