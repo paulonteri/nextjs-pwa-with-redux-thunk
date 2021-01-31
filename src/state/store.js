@@ -1,16 +1,37 @@
 import { useMemo } from "react";
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunkMiddleware from "redux-thunk";
-import reducers from "./reducers";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers/index";
+// import * as Sentry from "@sentry/react";
+// const sentryReduxEnhancer = Sentry.createReduxEnhancer({
+//     // Optionally pass options
+// });
 
 let store;
 
+const middleware = [thunk];
+
+function returnMiddleware() {
+  if (process.env.NODE_ENV === "development") {
+    const { createLogger } = require("redux-logger");
+    const { composeWithDevTools } = require("redux-devtools-extension");
+
+    const logger = createLogger({
+      // ...options
+    });
+
+    middleware.push(logger);
+    return composeWithDevTools(applyMiddleware(...middleware));
+  } else {
+    return applyMiddleware(...middleware);
+  }
+}
+
 function initStore(initialState) {
   return createStore(
-    reducers,
+    rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(thunkMiddleware))
+    compose(returnMiddleware()) // , sentryReduxEnhancer)
   );
 }
 
