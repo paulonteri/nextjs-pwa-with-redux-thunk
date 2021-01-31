@@ -2,6 +2,9 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import { useStore } from "../src/state/store";
 
+// styles
+import "../src/styles/index.css";
+
 export default function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
 
